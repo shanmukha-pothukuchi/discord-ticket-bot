@@ -5,7 +5,9 @@ let tickets = new Map();
 
 client.on("ready", () => {
   console.log("Hey, I am here!!");
-  client.user.setActivity("No Commands Yet!");
+  client.user.setActivity(
+    "DO ?openticket to open and ?closeticket to close the ticket"
+  );
 });
 
 client.on("message", (msg) => {
