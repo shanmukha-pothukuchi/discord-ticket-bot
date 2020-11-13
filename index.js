@@ -22,7 +22,7 @@ client.on("message", (msg) => {
         "You already have a ticket open! First close it before opening one, Do `?closeticket` to close the existing one"
       );
     } else {
-      const guild = msg.guild;
+      let guild = msg.guild;
       msg.channel.send("mhm");
       let name = `${msg.author.username}s ticket`;
       guild.channels
