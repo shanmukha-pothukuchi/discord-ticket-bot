@@ -53,7 +53,8 @@ client.on("message", (msg) => {
       let guild = msg.guild;
       client.channels
         .fetch(tickets.get(msg.author.id))
-        .then((channel) => channel.delete());
+        .then((channel) => channel.delete())
+        .catch((err) => console.log(err));
       tickets.delete(msg.author.id);
       msg.channel.send("mhm");
       console.log(tickets);
