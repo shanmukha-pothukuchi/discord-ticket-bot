@@ -54,6 +54,7 @@ client.on("message", (msg) => {
       client.channels
         .fetch(tickets.get(msg.author.id))
         .then((channel) => channel.delete());
+      tickets.delete(msg.author.id);
       console.log(tickets);
     } else {
       msg.author.send(
