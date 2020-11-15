@@ -12,6 +12,8 @@ client.on("ready", () => {
 
 client.on("message", (msg) => {
   if (!msg.content.startsWith(bot.prefix) || msg.author.bot) return;
+  if (!msg.guild)
+    return msg.channel.send("You must send the message in a server!!");
 
   const args = msg.content.slice(bot.prefix.length).trim().split(" ");
   const command = args.shift().toLowerCase();
@@ -41,7 +43,7 @@ client.on("message", (msg) => {
         })
         .then((chl) => {
           console.log(`Created ${chl.name} channel.`);
-          tickets.set(msg.author.id, chl.id);
+          tickets.set(`${msg.author.id}${msg.guild}`, chl.id);
           console.log(tickets);
         })
         .catch((err) => console.log(err));
@@ -49,13 +51,13 @@ client.on("message", (msg) => {
   }
 
   if (command === "closeticket") {
-    if (tickets.has(msg.author.id)) {
+    if (tickets.has(`${msg.author.id}${msg.guild}`)) {
       let guild = msg.guild;
       client.channels
-        .fetch(tickets.get(msg.author.id))
+        .fetch(tickets.get(`${msg.author.id}${msg.guild}`))
         .then((channel) => channel.delete())
         .catch((err) => console.log(err));
-      tickets.delete(msg.author.id);
+      tickets.delete(`${msg.author.id}${msg.guild}`);
       msg.channel.send("mhm");
       console.log(tickets);
     } else {
