@@ -20,7 +20,7 @@ client.on("message", (msg) => {
 
   if (command === "help") {
     let helpEmbed = new MessageEmbed()
-      .setColor("RANDOM")
+      .setColor("#FF0000")
       .setTitle("Ticket Bot Help")
       .setDescription(
         "? is the prefix for the bot.. Here are some stuff that this bot can do!!"
