@@ -1,4 +1,4 @@
-const { Client } = require("discord.js");
+const { Client, MessageEmbed } = require("discord.js");
 const client = new Client();
 const bot = require("./configure.json");
 let tickets = new Map();
@@ -17,6 +17,39 @@ client.on("message", (msg) => {
 
   const args = msg.content.slice(bot.prefix.length).trim().split(" ");
   const command = args.shift().toLowerCase();
+
+  if (command === "help") {
+    let helpEmbed = new MessageEmbed()
+      .setColor("RANDOM")
+      .setTitle("Ticket Bot Help")
+      .setDescription(
+        "? is the prefix for the bot.. Here are some stuff that this bot can do!!"
+      )
+      .addFields(
+        {
+          name: "For Everyone",
+          value: "*The commands below work for everyone*",
+        },
+        { name: "?openticket", value: "To create a new ticket!", inline: true },
+        {
+          name: "?closeticket",
+          value: "To close a ticket that was already created!",
+          inline: true,
+        },
+        {
+          name: "Only for ADMINS",
+          value: "*The commands below work only for Admins*",
+        },
+        {
+          name: "?close",
+          value: "To close an existing ticket created!!",
+          inline: true,
+        }
+      )
+      .setTimestamp();
+
+    msg.channel.send(helpEmbed);
+  }
 
   if (command === "openticket") {
     if (tickets.has(`${msg.author.id}${msg.guild}`)) {
