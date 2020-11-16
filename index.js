@@ -104,18 +104,17 @@ client.on("message", (msg) => {
     chnl_id = msg.channel.id;
     tickets.forEach((v, k, m) => {
       if (v == chnl_id) {
+        msg.channel.send("mhm");
         tickets.delete(k);
-        client.channels
+        return client.channels
           .fetch(chnl_id)
           .then((channel) => channel.delete())
           .catch((err) => console.log(err));
-        msg.channel.send("mhm");
       } else {
-        msg.channel.send(
+        return msg.channel.send(
           "This channel is not a ticket.. Try this command in a ticket channel!!"
         );
       }
-      console.log(tickets);
     });
   }
 });
