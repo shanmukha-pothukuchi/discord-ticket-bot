@@ -22,7 +22,7 @@ client.on("message", (msg) => {
       .setColor("#f68c1f")
       .setTitle("Ticket Bot Help")
       .setDescription(
-        "? is the prefix for the bot.. Here are some stuff that this bot can do!!"
+        "? is the prefix for the bot.. Here is some stuff that this bot can do!!"
       )
       .addFields(
         {
