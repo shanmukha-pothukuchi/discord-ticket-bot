@@ -27,26 +27,21 @@ client.on("message", (msg) => {
       )
       .addFields(
         {
-          name: "For Everyone",
-          value: "*The commands below work for everyone*",
+          name: "?openticket",
+          value: "To create a new ticket!",
+          inline: false,
         },
-        { name: "?openticket", value: "To create a new ticket!", inline: true },
         {
           name: "?closeticket",
-          value: "To close a ticket that was already created!",
-          inline: true,
+          value: "To close a ticket that was already created by you!",
+          inline: false,
         },
         {
-          name: "Only for ADMINS",
-          value: "*The commands below work only for Admins*",
-        },
-        {
-          name: "?close",
-          value: "To close an existing ticket created!!",
-          inline: true,
+          name: "?close (**ADMINS ONLY**)",
+          value: "To close an existing ticket created by a different user!!",
+          inline: false,
         }
-      )
-      .setTimestamp();
+      );
 
     msg.channel.send(helpEmbed);
   }
