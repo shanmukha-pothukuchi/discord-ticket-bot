@@ -77,11 +77,18 @@ client.on("message", (msg) => {
     tickets.forEach((v, k, m) => {
       if (v == chnl_id) {
         tickets.delete(k);
-        msg.channel.delete();
+        client.channels
+          .fetch(chnl_id)
+          .then((channel) => channel.delete())
+          .catch((err) => console.log(err));
+        msg.channel.send("mhm");
+      } else {
+        msg.channel.send(
+          "This channel is not a ticket.. Try this command in a ticket channel!!"
+        );
       }
       console.log(tickets);
     });
-    msg.channel.send("mhm");
   }
 });
 
