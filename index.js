@@ -45,21 +45,6 @@ client.on("message", (msg) => {
     msg.channel.send(helpEmbed);
   }
 
-  if (command === "setup") {
-    if (msg.member.hasPermission("ADMINISTRATOR")) {
-      let guild = msg.guild;
-      guild.channels
-        .create("Tickets", {
-          type: "category",
-        })
-        .then((category) => {
-          categoryID = category.id;
-        });
-    } else {
-      msg.channel.send("You must be the admin to run the setup command!");
-    }
-  }
-
   if (command === "openticket") {
     if (tickets.has(`${msg.author.id}${msg.guild}`)) {
       msg.author.send(
@@ -84,7 +69,6 @@ client.on("message", (msg) => {
           ],
         })
         .then((chl) => {
-          chl.setParent(categoryID);
           tickets.set(`${msg.author.id}${msg.guild}`, chl.id);
           console.log(tickets);
         })
