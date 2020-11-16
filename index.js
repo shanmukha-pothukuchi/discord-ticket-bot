@@ -19,7 +19,7 @@ client.on("message", (msg) => {
   const command = args.shift().toLowerCase();
 
   if (command === "openticket") {
-    if (tickets.has(msg.author.id)) {
+    if (tickets.has(`${msg.author.id}${msg.guild}`)) {
       msg.author.send(
         "You already have a ticket open! First close it before opening one, Do `?closeticket` to close the existing one"
       );
@@ -65,6 +65,23 @@ client.on("message", (msg) => {
         "You must have a ticket to close it, so please open a ticket by typing `?openticket`"
       );
     }
+  }
+
+  if (command === "close") {
+    if (!msg.member.hasPermission("ADMINISTRATOR")) {
+      return msg.author.send(
+        "You should be the Admin of the server to run close command!!"
+      );
+    }
+    chnl_id = msg.channel.id;
+    tickets.forEach((v, k, m) => {
+      if (v == chnl_id) {
+        tickets.delete(k);
+        msg.channel.delete();
+      }
+      console.log(tickets);
+    });
+    msg.channel.send("mhm");
   }
 });
 
